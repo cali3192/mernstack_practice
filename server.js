@@ -9,6 +9,8 @@ const url = "mongodb://localhost:27017";
 // const db = client.db("mern_shopping");
 let db;
 
+const items = require("./routes/api/items/.js");
+
 const app = express();
 
 app.use(bodyParser.JSON());
