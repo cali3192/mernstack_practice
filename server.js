@@ -35,3 +35,10 @@ MongoClient.connect(url)
   .catch(err =>
     console.error(err, "There was an error connecting to the database")
   );
+
+// back to the server side stuff
+const port = process.env.PORT || 5000;
+
+app.listen(port => {
+  console.log(`listening on port ${port}, Queen!`);
+});
