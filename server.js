@@ -17,26 +17,22 @@ app.use(bodyParser.JSON());
 app.use(bodyParser.urlencoded());
 
 // Database connections
-MongoClient.connect(url)
-  .then(client => {
-    const db = client.db("mern-shopping");
-    // db.collection("exhibit").insertOne({
-    //   species: "Lion",
-    //   name: "Fred",
-    //   age: 12
-    // });
-  })
-  .catch(err =>
-    console.error(err, "There was an error inserting into the database")
-  );
 
-MongoClient.connect(url)
-  .then(client => {
-    db = client.db("mern_shopping");
-  })
-  .catch(err =>
-    console.error(err, "There was an error connecting to the database")
-  );
+// TODO: later, change the connect to the db config, maybe
+mongoose
+  .connect("mongodb://localhost/mern_shopping")
+  .then(() => console.log("she's connected to the mongoose server"))
+  .catch(err => console.log("mongo server err => ", err));
+
+// console a message if the connection is sucessful: https://mongoosejs.com/docs/index.html
+var db = mongoose.connection;
+db.on("error", console.error.bind(console, "mongoose connection error:"));
+db.once("open", function() {
+  console.log(`she's connected! - mongodb server`);
+});
+
+//  Using our routes from api foler
+app.use("api/items");
 
 // back to the server side stuff
 const port = process.env.PORT || 5000;
